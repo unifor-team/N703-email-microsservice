@@ -1,6 +1,6 @@
-package com.ms.email.models;
+package com.email.ms_email.models;
 
-import com.ms.email.enums.StatusEmail;
+import com.email.ms_email.enums.StatusEmail;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

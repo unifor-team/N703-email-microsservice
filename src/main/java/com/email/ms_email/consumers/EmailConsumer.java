@@ -24,4 +24,6 @@ public class EmailConsumer {
         BeanUtils.copyProperties(emailRecordDto, emailModel);
         emailService.sendEmail(emailModel);
     }
+
+    
 }

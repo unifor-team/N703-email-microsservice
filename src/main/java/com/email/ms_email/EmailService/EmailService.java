@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EmailService {
@@ -46,5 +47,7 @@ public class EmailService {
             return emailRepository.save(emailModel);
         }
     }
-
+    public List<EmailModel> listAllEmails() {
+        return emailRepository.findAll();
+}
 }

@@ -14,15 +14,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/emails")
-
 public class EmailController {
 
-    private EmailService emailService;
+    private final EmailService emailService;
+
+    public EmailController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     @GetMapping
     public ResponseEntity<List<EmailModel>> listAllEmails() {
         List<EmailModel> emails = emailService.listAllEmails();
         return new ResponseEntity<>(emails, HttpStatus.OK);
     
-}
+    }
 }

@@ -1,17 +1,20 @@
-# Use an official OpenJDK 17 image as the base image
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine as build
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Spring Boot jar file into the container
-COPY target/your-spring-boot-app.jar /app/app.jar
+COPY pom.xml ./
+COPY src ./src
 
-# Expose the port your Spring Boot application runs on (default is 8080)
+RUN apk add --no-cache maven && mvn clean package -DskipTests
+
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar /app/app.jar
+
 EXPOSE 8080
 
-# Set environment variable to run the app with Java
 ENV JAVA_OPTS=""
 
-# Entry point to run the Spring Boot application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
